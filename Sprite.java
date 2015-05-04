@@ -10,7 +10,7 @@ public class Sprite
 	private Image image;
 	private int xsize, ysize;
 	private int xposition, yposition;
-	
+
 	/**
 	 * Create a sprite whose image is loaded from the file with the given name.
 	 * GIF, PNG, and JPEG formats are supported.
@@ -24,7 +24,7 @@ public class Sprite
 		this.xposition = 0;
 		this.yposition = 0;
 	}
-	
+
 	/**
 	 * Create a copy of the given sprite.
 	 * @param original Sprite to make a copy of.
@@ -37,7 +37,7 @@ public class Sprite
 		this.xposition = original.xposition;
 		this.yposition = original.yposition;
 	}
-	
+
 	/**
 	 * Obtain the current horizontal (x-direction) position of this sprite.
 	 * (0, 0) are the coordinates of the lower left corner of the window.
@@ -47,7 +47,7 @@ public class Sprite
 	{
 		return this.xposition;
 	}
-	
+
 	/**
 	 * Obtain the current vertical (y-direction) position of this sprite.
 	 * (0, 0) are the coordinates of the lower left corner of the window.
@@ -57,7 +57,7 @@ public class Sprite
 	{
 		return this.yposition;
 	}
-	
+
 	/**
 	 * Change the position of this sprite.
 	 * (0, 0) are the coordinates of the lower left corner of the window.
@@ -79,7 +79,7 @@ public class Sprite
 	{
 		return this.xsize;
 	}
-	
+
 	/**
 	 * Obtain the current vertical (y-direction) size of this sprite.
 	 * @return Vertical size, in pixels.
@@ -88,7 +88,7 @@ public class Sprite
 	{
 		return this.ysize;
 	}
-	
+
 	/**
 	 * Change the size of this sprite.
 	 * The minimum size is one pixel in each dimension.
@@ -100,7 +100,7 @@ public class Sprite
 		this.xsize = Math.max(1, xsize);
 		this.ysize = Math.max(1, ysize);
 	}
-	
+
 	/**
 	 * Change the image used by this sprite.
 	 * Image is loaded from the file with the given name.
@@ -119,11 +119,11 @@ public class Sprite
 			System.exit(-1);
 		}
 	}
-	
+
 	/////////////////////////////////////////////////////////////////////////////
 	// for use by Animation class only
 	/////////////////////////////////////////////////////////////////////////////
-	
+
 	Image getImage()
 	{
 		return this.image;

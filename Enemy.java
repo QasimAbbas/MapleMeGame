@@ -3,6 +3,7 @@ public class Enemy{
 	private Sprite enemy;
 
 	//The Constructor
+	
 	public Enemy(int width, int height){
 		enemy = new Sprite("enemy_left_stand1-0.png");
 		enemy.setPosition(width, height/2);
@@ -22,6 +23,7 @@ public class Enemy{
 
 		return enemyStandingLeft;
 	}
+
 
 	//Enemy Standing Left
 	public static void enemyStandingLeft(Animation window, Sprite enemy, int fps){

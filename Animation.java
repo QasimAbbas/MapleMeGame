@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.util.*;
 import javax.imageio.ImageIO;
 import java.io.*;
+import java.awt.event.*;
+
 
 /**
  * An instance of this class is an animation
@@ -11,14 +13,95 @@ import java.io.*;
  * You set up each frame by adding, removing, or positioning sprites,
  * then call frameFinished to display the completed frame onscreen.
  */
-public class Animation extends JFrame
+public class Animation extends JFrame implements KeyListener
 {
+
+	private boolean moveLeft;
+	private boolean moveRight;
+	private boolean moveUp;
+	private boolean moveDown;
+
+	public boolean playerMoveLeft(){
+		return moveLeft;
+	}
+
+	public boolean playerMoveRight(){
+		return moveRight;
+	}
+
+	public boolean playerMoveUp(){
+		return moveUp;
+	}
+
+	public boolean playerMoveDown(){
+		return moveDown;
+	}
+
+	public void actionPerformed(ActionEvent e) {
+
+
+	}
+	public void keyTyped(KeyEvent e) {
+
+
+
+	}
+	public void keyPressed(KeyEvent e) {
+
+		Sprite s = sprites.get(0);
+
+		//Check the Key Being Pressed
+		// System.out.println(e.getKeyCode());
+
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+							moveRight = true;
+							s.setPosition(s.getXposition() + 3, s.getYposition());
+						//	frameFinished();
+
+
+        }else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+								moveLeft = true;
+								s.setPosition(s.getXposition() - 3, s.getYposition());
+									frameFinished();
+
+		   }else if(e.getKeyCode() == KeyEvent.VK_UP) {
+										moveUp = true;
+										s.setPosition(s.getXposition(), s.getYposition() + 3);
+
+											frameFinished();
+
+			}else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+							moveDown = true;
+							s.setPosition(s.getXposition(), s.getYposition() - 3);
+
+								frameFinished();
+
+	        }
+
+
+
+	}
+
+
+	public void keyReleased(KeyEvent e) {
+
+		moveUp = false;
+		moveDown = false;
+		moveLeft = false;
+		moveRight = false;
+
+
+
+	}
+
+
+
 	private static class Canvas extends JPanel
 	{
 		int xsize, ysize;
 		Image bgimage;
 		ArrayList<Sprite> sprites;
-		
+
 		public Canvas(int xsize, int ysize)
 		{
 			this.xsize = xsize;
@@ -27,7 +110,7 @@ public class Animation extends JFrame
 			this.bgimage = null;
 			this.sprites = null;
 		}
-		
+
 		public void saveFrame(Image bgimage, ArrayList<Sprite> sprites)
 		{
 			synchronized (this)
@@ -40,21 +123,21 @@ public class Animation extends JFrame
 				}
 			}
 		}
-		
+
 		public void paint(Graphics g)
 		{
 			Image spriteimage;
 			int spritexpos, spriteypos, spritexsize, spriteysize;
-			
+
 			super.paint(g);
-			
+
 			synchronized (this)
 			{
 				if (this.bgimage != null)
 				{
 					g.drawImage(this.bgimage, 0, 0, xsize, ysize, null);
 				}
-				
+
 				if (this.sprites != null)
 				{
 					for (Sprite sprite : this.sprites)
@@ -64,7 +147,7 @@ public class Animation extends JFrame
 						spriteypos = sprite.getYposition();
 						spritexsize = sprite.getXsize();
 						spriteysize = sprite.getYsize();
-						
+
 						g.drawImage(
 							spriteimage,
 							spritexpos,
@@ -90,6 +173,9 @@ public class Animation extends JFrame
 	 */
 	public Animation(int xsize, int ysize)
 	{
+
+
+
 		super("Animation");
 
 		this.canvas = new Canvas(xsize, ysize);
@@ -101,8 +187,10 @@ public class Animation extends JFrame
 		this.bgimage = null;
 		this.sprites = new ArrayList<Sprite>();
 		this.frameDelay = 1000L;
+
+		this.addKeyListener(this);
 	}
-	
+
 	/**
 	 * Set the frame rate (speed) of the animation.
 	 * Higher numbers result in faster animations.
@@ -112,7 +200,7 @@ public class Animation extends JFrame
 	{
 		this.frameDelay = 1000L / framesPerSecond;
 	}
-	
+
 	/**
 	 * Set the image drawn in the background of the animation.
 	 * GIF, PNG, and JPEG formats are supported.
@@ -130,7 +218,7 @@ public class Animation extends JFrame
 			System.exit(-1);
 		}
 	}
-	
+
 	/**
 	 * Add a sprite to the animation.
 	 * The sprite will appear in the next frame.
@@ -144,13 +232,13 @@ public class Animation extends JFrame
 		{
 			throw new NullPointerException();
 		}
-		
+
 		if ( ! this.sprites.contains(sprite) )
 		{
 			this.sprites.add(sprite);
 		}
 	}
-	
+
 	/**
 	 * Remove a sprite from the animation.
 	 * The sprite will disappear in the next frame.
@@ -160,7 +248,7 @@ public class Animation extends JFrame
 	{
 		this.sprites.remove(sprite);
 	}
-	
+
 	/**
 	 * Indicate that the arrangement of the next frame is complete.
 	 * Any changes made to the sprites or background will be saved into an animation frame when this method is called.
@@ -170,7 +258,7 @@ public class Animation extends JFrame
 		this.canvas.saveFrame(this.bgimage, this.sprites);
 		this.setVisible(true);
 		this.repaint();
-		
+
 		try
 		{
 			Thread.sleep(this.frameDelay);
