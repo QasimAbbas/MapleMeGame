@@ -12,7 +12,7 @@ public class Enemy{
 
 	public Sprite getEnemy(){
 		return enemy;
-	}
+}
 
 	//Enemy Standing Left Sprite
 	public static String[] enemyStandingLeftImages(){
@@ -76,37 +76,41 @@ public class Enemy{
 
 
 //Static Enemy Walking Left
-	public static void enemyMovement(Animation window,Sprite player, Sprite enemy){
+	public static void enemyMovement(Animation window,Sprite player, Sprite enemy, int counter, int imageCount){
 		String[] enemyWalk = enemyWalkLeft();
 		int[] enemyWalkSize = enemyWalkLeftSize();
 
 		int j = 0;
-		int counter = 0;
 
 		int i = enemy.getXposition();
-		int p = player.getXposition();
+		int y = enemy.getYposition();
 
-		if(i != p){
+		int xPlayer = player.getXposition();
+		int yPlayer = player.getYposition();
 
-			counter++;
-			
-			enemy.setPosition(i, enemy.getYposition());
-			i--;
+			if(enemy.getXposition() > xPlayer){
+				i-= 2;
+				enemy.setPosition(i, enemy.getYposition());
+			}else if(enemy.getXposition() < xPlayer){
+				i+= 2;
+				enemy.setPosition(i, enemy.getYposition());
+			}
 
-			if(counter % 10 == 0){
+			if(enemy.getYposition() > yPlayer){
+				y-=2;
+				enemy.setPosition(enemy.getXposition(), y);
+			}else if(enemy.getYposition() < yPlayer){
+				y+=2;
+				enemy.setPosition(enemy.getXposition(), y);
+			}
 
-				if(j >= 3){
-					j = 0;
-				}else{
-					j++;
-				}
+
+
 
 				enemy.setImage(enemyWalk[j]);
 				enemy.setSize(enemyWalkSize[j], 76);
-			}
 
-			window.frameFinished();
-		}
+				window.frameFinished();
 
 	}
 

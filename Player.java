@@ -76,7 +76,7 @@ public class Player{
 
 
 	//Player Walking Left Animation
-	public static void playerWalkingLeft(Animation window, Sprite player, boolean walking, boolean goingRight){
+	public static void playerWalkingLeft(Animation window, Sprite player, boolean walking, boolean goingRight, Enemy enemy,int refresh, int enemyImageCount){
 
 		String[] playerWalk = playerWalkLeft();
 		int[] playerWalkLeftSize = playerWalkLeftSize();
@@ -88,7 +88,7 @@ public class Player{
 		while(walking){
 		counter++;
 		player.setPosition(i, player.getYposition());
-		i-= 2;
+		i-= 3;
 
 		if(counter % 5 == 0){
 
@@ -107,6 +107,7 @@ public class Player{
 
 		}
 
+		enemy.enemyMovement(window, player, enemy.getEnemy(), refresh, enemyImageCount);
 		window.frameFinished();
 
 		}
@@ -114,7 +115,7 @@ public class Player{
 	}
 
 	//Player Walking Rigth Animation
-	public static void playerWalkingRight(Animation window, Sprite player, boolean walking, boolean goingRight){
+	public static void playerWalkingRight(Animation window, Sprite player, boolean walking, boolean goingRight, Enemy enemy,int refresh, int enemyImageCount){
 
 		String[] playerWalk = playerWalkRight();
 		int[] playerWalkLeftSize = playerWalkLeftSize();
@@ -126,7 +127,7 @@ public class Player{
 		while(walking){
 		counter++;
 		player.setPosition(i, player.getYposition());
-		i+= 2;
+		i+= 3;
 
 		if(counter % 5 == 0){
 
@@ -145,6 +146,7 @@ public class Player{
 
 		}
 
+		enemy.enemyMovement(window, player, enemy.getEnemy(), refresh, enemyImageCount);
 		window.frameFinished();
 
 		}
@@ -152,7 +154,7 @@ public class Player{
 	}
 
 	//Player Walking Up Animation
-	public static void playerWalkingUp(Animation window, Sprite player, boolean walking, boolean goingRight){
+	public static void playerWalkingUp(Animation window, Sprite player, boolean walking, boolean goingRight, Enemy enemy, int refresh, int enemyImageCount){
 		String[] playerWalk = playerWalkRight();
 		if(goingRight){
 			playerWalk = playerWalkRight();
@@ -170,7 +172,7 @@ public class Player{
 		while(walking){
 		counter++;
 		player.setPosition(player.getXposition(), i);
-		i+= 2;
+		i+= 3;
 
 		if(counter % 5 == 0){
 
@@ -189,6 +191,7 @@ public class Player{
 
 		}
 
+		enemy.enemyMovement(window, player, enemy.getEnemy(), refresh, enemyImageCount);
 		window.frameFinished();
 
 		}
@@ -196,7 +199,7 @@ public class Player{
 	}
 
 	//PlayerWalking Down Animation
-	public static void playerWalkingDown(Animation window, Sprite player, boolean walking, boolean goingRight){
+	public static void playerWalkingDown(Animation window, Sprite player, boolean walking, boolean goingRight, Enemy enemy, int refresh, int enemyImageCount){
 		String[] playerWalk = playerWalkRight();
 
 		if(goingRight){
@@ -214,7 +217,7 @@ public class Player{
 		while(walking){
 		counter++;
 		player.setPosition(player.getXposition(), i);
-		i-= 2;
+		i-= 3;
 
 		if(counter % 5 == 0){
 
@@ -233,6 +236,7 @@ public class Player{
 
 		}
 
+		enemy.enemyMovement(window, player, enemy.getEnemy(), refresh, enemyImageCount);
 		window.frameFinished();
 
 		}
