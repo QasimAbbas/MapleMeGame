@@ -3,7 +3,7 @@ public class Movie{
 	public static void main(String[] args){
 		int height = 600;
 		int  width = 600;
-		int fps = 120;
+		int fps = 30;
 
 		Animation window = new Animation(width,height);
 		window.setBackgroundImage("grass.png");
@@ -20,9 +20,11 @@ public class Movie{
 
 		while(game == false){
 
+				enemy.enemyMovement(window, player.getPlayer(), enemy.getEnemy());
+
 			//PLayer Movement
 
-			if(window.playerMoveLeft() == true){
+				if(window.playerMoveLeft() == true){
 
 					goingRight = false;
 				//System.out.println("Left");
@@ -51,7 +53,7 @@ public class Movie{
 				player.playerWalkingLeft(window, player.getPlayer(), false, goingRight);
 				player.playerWalkingRight(window, player.getPlayer(), false, goingRight);
 
-				//enemy.enemyMovement(window, player.getPlayer(), enemy.getEnemy());
+
 				window.frameFinished();
 
 			}

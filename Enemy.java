@@ -3,7 +3,7 @@ public class Enemy{
 	private Sprite enemy;
 
 	//The Constructor
-	
+
 	public Enemy(int width, int height){
 		enemy = new Sprite("enemy_left_stand1-0.png");
 		enemy.setPosition(width, height/2);
@@ -84,9 +84,12 @@ public class Enemy{
 		int counter = 0;
 
 		int i = enemy.getXposition();
+		int p = player.getXposition();
 
-		while(enemy.getXposition() != player.getXposition()){
+		if(i != p){
+
 			counter++;
+			
 			enemy.setPosition(i, enemy.getYposition());
 			i--;
 
